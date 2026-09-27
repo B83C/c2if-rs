@@ -1,0 +1,23 @@
+[package]
+name = "c2if-esp32c3-bridge"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+c2if = { path = "../..", features = ["embassy", "bridge"] }
+esp-hal = { version = "0.23", features = ["esp32c3"] }
+esp-hal-embassy = { version = "0.6", features = ["esp32c3"] }
+esp-backtrace = { version = "0.14", features = ["esp32c3", "panic-handler", "println"] }
+esp-println = { version = "0.11", features = ["esp32c3"] }
+embassy-executor = { version = "0.7", features = ["executor-thread", "task-arena-size-32768"] }
+embassy-time = "0.5"
+embedded-hal = "1.0"
+embedded-hal-async = "1.0"
+embedded-io = "0.6"
+embedded-io-async = "0.6"
+static_cell = "2"
+
+[profile.release]
+opt-level = "s"
+lto = true

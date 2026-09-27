@@ -1,0 +1,38 @@
+[package]
+name = "c2if"
+version = "0.1.0"
+edition = "2021"
+description = "Silicon Labs C2 interface flash programmer for EFM8 BLHeli_S ESCs (BB51/BB21/BB1)"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/b83c/c2if-rs"
+keywords = ["embedded", "esc", "blheli", "c2", "flash"]
+categories = ["embedded", "no-std"]
+
+[dependencies]
+embedded-hal = "1.0"
+embedded-hal-async = "1.0"
+embedded-io-async = { version = "0.6", optional = true }
+num_enum = { version = "0.7", default-features = false }
+bitflags = { version = "2.6", default-features = false }
+
+# Optional
+cortex-m = { version = "0.7", optional = true }
+embassy-time = { version = "0.5", optional = true }
+defmt = { version = "0.3", optional = true }
+
+[dev-dependencies]
+futures = "0.3"
+
+[dev-dependencies.c2if]
+path = "."
+features = ["mock"]
+
+[features]
+default = ["embassy", "cortex-m"]
+std = []
+embassy = ["dep:embassy-time"]
+cortex-m = ["dep:cortex-m"]
+defmt-impl = ["defmt"]
+mock = []
+bridge = ["dep:embedded-io-async"]
